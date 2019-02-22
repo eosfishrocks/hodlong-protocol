@@ -1,7 +1,7 @@
 const arrayRemove = require('unordered-array-remove')
 const bencode = require('bencode')
 const BitField = require('bitfield')
-const debug = require('debug')('bittorrent-protocol')
+const debug = require('debug')('hodlong-protocol')
 const extend = require('xtend')
 const randombytes = require('randombytes')
 const speedometer = require('speedometer')
@@ -135,8 +135,9 @@ class Wire extends stream.Duplex {
   /**
    * Use the specified protocol extension.
    * @param  {function} Extension
+   * @param  {dict} extensionOpts Optional constructor method for extensions
    */
-  use (Extension) {
+  use (Extension, extensionOpts) {
     const name = Extension.prototype.name
     if (!name) {
       throw new Error('Extension class requires a "name" property on the prototype')
@@ -144,7 +145,7 @@ class Wire extends stream.Duplex {
     this._debug('use extension.name=%s', name)
 
     const ext = this._nextExt
-    const handler = new Extension(this)
+    const handler = new Extension(this, extensionOpts)
 
     function noop () {}
 

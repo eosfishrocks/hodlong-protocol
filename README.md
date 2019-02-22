@@ -1,4 +1,7 @@
-# bittorrent-protocol [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
+#TODO Update readme. This is the old bittorrent-protocol readme. It does not address the EOS integration.
+
+
+# hodltorrent-protocol [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
 
 [travis-image]: https://img.shields.io/travis/webtorrent/bittorrent-protocol/master.svg
 [travis-url]: https://travis-ci.org/webtorrent/bittorrent-protocol
