@@ -91,6 +91,14 @@ class Wire extends stream.Duplex {
     this._parseHandshake()
   }
 
+  getDownloaded() {
+    return this.downloaded
+  }
+
+  getUploaded() {
+    return this.uploaded
+  }
+
   /**
    * Set whether to send a "keep-alive" ping (sent every 55s)
    * @param {boolean} enable
@@ -146,7 +154,6 @@ class Wire extends stream.Duplex {
 
     const ext = this._nextExt
     const handler = new Extension(this, extensionOpts)
-
     function noop () {}
 
     if (typeof handler.onHandshake !== 'function') {
@@ -157,6 +164,9 @@ class Wire extends stream.Duplex {
     }
     if (typeof handler.onMessage !== 'function') {
       handler.onMessage = noop
+    }
+    if (name !== 'ut_hodlong') {
+      handler.onStats = noop
     }
 
     this.extendedMapping[ext] = name
@@ -336,6 +346,10 @@ class Wire extends stream.Duplex {
     this.uploaded += buffer.length
     this.uploadSpeed(buffer.length)
     this.emit('upload', buffer.length)
+    let name
+    for (name in this._ext) {
+      this._ext[name].onStats()
+    }
     this._message(7, [index, offset], buffer)
   }
 
@@ -508,6 +522,10 @@ class Wire extends stream.Duplex {
     this._callback(this._pull(this.requests, index, offset, buffer.length), null, buffer)
     this.downloaded += buffer.length
     this.downloadSpeed(buffer.length)
+    let name
+    for (name in this._ext) {
+      this._ext[name].onStats()
+    }
     this.emit('download', buffer.length)
     this.emit('piece', index, offset, buffer)
   }
@@ -725,6 +743,10 @@ class Wire extends stream.Duplex {
     }
     while (this.requests.length) {
       this._callback(this.requests.pop(), new Error('wire was closed'), null)
+    }
+    let name
+    for (name in this._ext) {
+      this._ext[name].onStats(true)
     }
   }
 

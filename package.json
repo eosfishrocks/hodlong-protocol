@@ -1,14 +1,12 @@
 {
-  "name": "bittorrent-protocol",
-  "description": "Simple, robust, BitTorrent peer wire protocol implementation",
-  "version": "3.0.1",
+  "name": "hodlong-protocol",
+  "description": "Simple, robust, BitTorrent peer wire protocol implementation that enable peer exchanges on the EOS ecosystem",
+  "version": "1.0.0",
   "author": {
-    "name": "WebTorrent, LLC",
-    "email": "feross@webtorrent.io",
-    "url": "https://webtorrent.io"
+    "name": "Hodlong"
   },
   "bugs": {
-    "url": "https://github.com/webtorrent/bittorrent-protocol/issues"
+    "url": "https://github.com/eosfishrocks/hodltorrent-protocol/issues"
   },
   "dependencies": {
     "bencode": "^2.0.0",
@@ -38,7 +36,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/webtorrent/bittorrent-protocol.git"
+    "url": "git://github.com/eosfishrocks/hodltorrent-protocol.git"
   },
   "scripts": {
     "test": "standard && tape test/*.js"
